@@ -34,3 +34,5 @@ example.*.com
 ```
 # Usage
 `cat subs| ./dclean`
+
+Inspired from : https://github.com/adamblok/domain-validator
