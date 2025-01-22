@@ -2,7 +2,7 @@
 import sys
 import re
 
-def load_tld_list(file_path="tlds.txt"):
+def load_tld_list(file_path="/root/tools/tlds2.txt"):
     try:
         with open(file_path, "r") as file:
             return [line.strip() for line in file if line.strip()]
@@ -27,10 +27,14 @@ def is_domain_valid(domain):
     for label in labels:
         if len(label) > 63 or re.search(r"[^a-zA-Z0-9\-_]", label):
             return False
-        if label.startswith("-") or label.endswith("-") or "--" in label:
+        if label.startswith("-") or label.endswith("-"):
             return False
-        if "xn--" in label and not label.startswith("xn--"):
-            return False
+        if "--" in label:
+            # Only allow "--" if the label starts with "xn--"
+            if not label.startswith("xn--"):
+                return False
+            if label.count("--") > 1:
+                return False
 
     tld = labels[-1]
     if tld not in tld_list:
