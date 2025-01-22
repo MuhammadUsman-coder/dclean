@@ -33,4 +33,4 @@ xn--c1yn--bb.com
 example.*.com
 ```
 # Usage
-cat subs| ./dclean
+`cat subs| ./dclean`
